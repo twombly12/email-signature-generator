@@ -2,6 +2,10 @@ section .email-signature {
     padding: 10%;
 }
 
+#uploaded-img {
+    display: none;
+}
+
 #popup-display {
     position: fixed;
     displaY: none;
