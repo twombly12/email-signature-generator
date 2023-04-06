@@ -1,5 +1,5 @@
 section .email-signature {
-    padding: 10%;
+    padding: 6% 10%;
     max-width: 800px;
     margin: 0 auto;
 }
@@ -96,7 +96,7 @@ section .email-signature {
     border: 2px solid rgb(230 230 230 / 1.0);
     background: #FFF;
     max-width: 800px;
-    padding: 40px;
+    padding: 40px 40px 50px;
     border-radius: 6px;
 }
 
