@@ -3,11 +3,9 @@ let signOffInput = "Regards, Sharka";
 let nameInput = "Sharka Chobot";
 let titleInput = "Chief Transformation Officer";
 let phoneInput = "604-987-4275";
-let countryCode = "1"
-let phoneLink = "+16049874275"
 let emailInput = "sharka@neuralimpact.ca";
 
-let timezoneInput = "Pacific Daylight Time (UTC-7)";
+let locationInput = "Pacific Daylight Time (UTC-7)";
 let quoteInput = "Fear doesn't shut you down; it wakes you up";
 let authorInput = "Veronica Roth";
 
@@ -17,9 +15,21 @@ let quotePadding = 10;
 let logoInput = "https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo-for-Email.png"
 
 function phoneFormat(phone) {
-    return phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6, phone.length);
+    // return phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6, phone.length);
+    return phone
 
 }
+
+let phoneEntered = '';
+
+function internationalPhone() {
+    const phoneInputField = document.querySelector("#phoneNumber");
+    phoneEntered = window.intlTelInput(phoneInputField, {
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+
+}
+internationalPhone()
 
 
 
@@ -32,11 +42,9 @@ function submitInfo() {
     signOffInput = document.getElementById('signOff').value;
     nameInput = document.getElementById('name').value;
     titleInput = document.getElementById('title').value;
-    countryCode = document.getElementById('countryCode').value;
-    phoneInput = phoneFormat(document.getElementById('phoneNumber').value);
-    phoneLink = "+" + document.getElementById('countryCode').value + document.getElementById('phoneNumber').value;
+    phoneInput = phoneFormat(phoneEntered.getNumber());
     emailInput = document.getElementById('emailAddress').value;
-    timezoneInput = document.getElementById('timeZone').value;
+    locationInput = document.getElementById('location').value;
     quoteInput = document.getElementById('quote').value;
     authorInput = document.getElementById('author').value;
     if (quoteInput === "") {
@@ -140,8 +148,8 @@ function generateSignature() {
                                         <tr>
                                             <td valign="middle" height="23" style="color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle; valign:middle;">
                                                 <img src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_Phone.png" valign="middle" height="18" width="18" alt="phone" style="display:inline;border:0px;border-radius: 0px;vertical-align:middle;" border="0" nosend="1"><span width=15px style="width:15px;">&nbsp&nbsp&nbsp</span>
-                                                <a valign="middle" height="18" href="tel:${phoneLink}" style="display:inline;color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle;">
-                                                    +${countryCode} ${phoneInput}</a>
+                                                <a valign="middle" height="18" href="tel:${phoneInput}" style="display:inline;color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle;">
+                                                    ${phoneInput}</a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -153,9 +161,9 @@ function generateSignature() {
                                         </tr>
                                         <tr>
                                             <td valign="middle" height="23" style="color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle; valign:middle;">
-                                                <img src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_Location.png" valign="middle" height="18" width="18" alt="timezone" style="display:inline;border:0px;border-radius: 0px;vertical-align:middle; " border="0" nosend="1"><span width=15px style="width:15px;">&nbsp&nbsp&nbsp</span>
+                                                <img src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_Location.png" valign="middle" height="18" width="18" alt="location" style="display:inline;border:0px;border-radius: 0px;vertical-align:middle; " border="0" nosend="1"><span width=15px style="width:15px;">&nbsp&nbsp&nbsp</span>
                                                 <span valign="middle" height="18" style="display:inline-block;color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle; padding-top:3px;">
-                                                    <em><strong style="color:#5EA5D6;">Time Zone:</strong> ${timezoneInput}</em></span>
+                                                    <em>${locationInput}</em></span>
                                             </td>
                                         </tr>
 

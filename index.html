@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dash Interactive</title>
     <script src="https://unpkg.com/merge-images"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <!-- <link rel="stylesheet" href="../css/email-signature-generator.css">
     <link rel="stylesheet" href="/css/style.css"> -->
     <!-- <script src="/js/content-elements.js"></script> -->
@@ -48,20 +50,17 @@
                 <div id="signature-container"></div>
                 <div id="email-container" class="">
                     <form id="emailInput" class="">
-                        <label id="portrait-name" class="filewrap" for="portrait-input">Upload Your Logo</label>
+                        <label id="portrait-name" class="filewrap" for="portrait-input">Upload Your Portrait</label>
                         <input id="portrait-input" data-attribute="portrait" type="file" accept="image/*" placeholder="Upload your Logo" onchange='uploadFile(this)'>
-                        <input type="text" id="signOff" placeholder="Sign Off" name="signOff" required="">
-                        <input type="text" id="name" placeholder="Full Name" name="name" required="">
-                        <input type="text" id="title" placeholder="Job Title" name="job-title" required="">
-                        <div class="phone-input-layout">
-                            <input type="tel" id="countryCode" placeholder="Country Code" name="country-code" required="" maxlength="2">
-                            <input type="tel" id="phoneNumber" placeholder="Phone 123456789 (No symbols, dashes, or spaces)" name="phone-number" required="" maxlength="10">
-                        </div>
-                        <input type="text" id="emailAddress" placeholder="Email address" name="email-address" required="">
-                        <input type="text" id="timeZone" placeholder="Timezone" name="time-zone" required="">
+                        <input class="third-field" type="text" id="signOff" placeholder="Sign Off" name="signOff" required="">
+                        <input class="third-field" type="text" id="name" placeholder="Full Name" name="name" required="">
+                        <input class="third-field" type="text" id="title" placeholder="Job Title" name="job-title" required="">
+                        <input type="tel" id="phoneNumber" placeholder="Phone Number" name="phone-number" required="" maxLength="10">
+                        <input class="half-field" type="text" id="emailAddress" placeholder="Email address" name="email-address" required="">
+                        <input type="text" id="location" placeholder="Location" name="location" required="">
                         <input type="text" id="quote" placeholder="Quote (Optional)" name="quote" required="">
                         <input type="text" id="author" placeholder="Author (Optional)" name="author" required="">
-                        <label id="logo-name" class="filewrap" for="logo-input">Upload Your Logo</label>
+                        <label id="logo-name" class="filewrap" for="logo-input">Upload Your Company Logo</label>
                         <input id="logo-input" data-attribute="logo" type="file" accept="image/*" placeholder="Upload your Logo" onchange='uploadFile(this)'>
                     </form>
                     <div class="form-buttons">
