@@ -1,25 +1,33 @@
 let imageInput = "https://neuralimpact.ca/wp-content/uploads/2012/07/sharka.png";
-let signOffInput = "Regards, Sharka";
-let nameInput = "Sharka Chobot";
-let titleInput = "Chief Transformation Officer";
-let phoneInput = "604-987-4275";
-let emailInput = "sharka@neuralimpact.ca";
+let signOffInput = "Regards, John";
+let nameInput = "John Smith";
+let titleInput = "Chief Executive Officer";
+let phoneInput = "555-123-4567";
+let emailInput = "john@dashinteractive.ca";
 
-let locationInput = "Pacific Daylight Time (UTC-7)";
+let locationInput = "Toronto, Canada";
+let websiteInput = "DashInteractive.ca";
 let quoteInput = "Fear doesn't shut you down; it wakes you up";
 let authorInput = "Veronica Roth";
 
 let quoteLine = quoteInput + " - " + authorInput;
 let quotePadding = 10;
 
-let logoInput = "https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo-for-Email.png"
+let facebookInput = 'https://www.facebook.com';
+let twitterInput = 'https://www.twitter.com';
+let linkedinInput = 'https://www.linkedin.com';
+let instagramInput = 'https://www.instagram.com';
+
+let logoInput = "/Dash Logo Colours-purple.svg"
+
 
 function phoneFormat(phone) {
-    // return phone.slice(0, 3) + "-" + phone.slice(3, 6) + "-" + phone.slice(6, phone.length);
-    return phone
-
+    phone = phone.split('')
+    let lastFour = phone.splice(-4).join('');
+    let secondThree = phone.splice(-3).join('');
+    let firstThree = phone.splice(-3).join('');
+    return `${phone.join('')} ${firstThree}-${secondThree}-${lastFour}`
 }
-
 let phoneEntered = '';
 
 function internationalPhone() {
@@ -27,9 +35,19 @@ function internationalPhone() {
     phoneEntered = window.intlTelInput(phoneInputField, {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
-
 }
 internationalPhone()
+
+function websitePrefix(website) {
+    if (website.slice(0, 8) == 'https://') {
+        website = website.split('').splice(8, website.length - 8);
+        website = website.join('');
+    } else if (website.slice(0, 7) == 'http://') {
+        website = website.split('').splice(7, website.length - 7);
+        website = website.join('');
+    }
+    return website
+}
 
 
 
@@ -45,15 +63,20 @@ function submitInfo() {
     phoneInput = phoneFormat(phoneEntered.getNumber());
     emailInput = document.getElementById('emailAddress').value;
     locationInput = document.getElementById('location').value;
+    websiteInput = websitePrefix(document.querySelector('#website').value);
     quoteInput = document.getElementById('quote').value;
     authorInput = document.getElementById('author').value;
     if (quoteInput === "") {
-        quotePadding = 0;
+        // quotePadding = 0;
         quoteLine = "";
     } else {
-        quotePadding = 10;
+        // quotePadding = 10;
         quoteLine = quoteInput + " - " + authorInput;
     }
+    facebookInput = document.querySelector('#facebook');
+    twitterInput = document.querySelector('#twitter');
+    linkedinInput = document.querySelector('#linkedIn');
+    instagramInput = document.querySelector('#instagram');
     logoInput = logoUrl.src;
 
     previewSignature();
@@ -102,117 +125,191 @@ function submitInfo() {
 function generateSignature() {
     const signatureOutput = `
 
-        <table cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;max-width:450px;" emb-background-style="" width="450" direction="ltr">
-    <tbody>
-        <tr>
-            <td>
-                <table cellspacing="0" cellpadding="0" border="0" style=" border-collapse: collapse;table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;direction: ltr" emb-background-style="">
-                    <tbody>
-                        <tr>
-                            <td style="padding-top:7.5px;padding-bottom: 30px;">
-                                <span style="color:#000;text-decoration:none;font-size:16px;font-family:Arial, Helvetica, sans-serif;font-weight:bold;line-height:18px;mso-line-height-rule:exactly;">
-                                    ${signOffInput}</span>
-                            </td>
-                        </tr>
+    <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;color:rgb(255,255,255);font-size:medium;vertical-align:-webkit-baseline-middle;font-family:Arial">
+    <tr height="50" style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+            <td style="box-sizing:border-box;padding:0px;border:0px">
+                <p color="#000000" style="box-sizing:border-box;font-size:18px; font-weight: bold;line-height:22px;margin:0px;color:rgb(0,0,0)"><span style="box-sizing:border-box">${signOffInput}</span></p><table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
+
+                        
+
                     </tbody>
                 </table>
-                <table cellspacing="0" cellpadding="0" border="0" style=" border-collapse: collapse;table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;direction: ltr" emb-background-style="">
-                    <tbody>
-                        <tr>
-                            <td style="padding-right:15px;vertical-align:top;font-family:Arial, Helvetica, sans-serif;width:145px;">
-                                <table style="border-collapse: collapse;table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;direction: ltr" emb-background-style="">
-                                    <tbody>
-                                        <tr>
-                                            <td style="height:80px;">
-                                                <img src="
-                                                ${imageInput}
-                                                " height="128" height="128" alt="logo" style="display:block;border:0px;border-radius: 0px;height:128px;width:128px;" border="0" nosend="1">
+            </td>
+        </tr>
+    <tbody style="box-sizing:border-box">
+        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+            <td style="box-sizing:border-box;padding:0px;border:0px">
+                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td width="150" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle"><span style="box-sizing:border-box;margin-right:20px;display:block"><img src="${imageInput}" role="presentation" width="130" style="box-sizing:border-box;border-style:none;max-width:130px" class="CToWUd" data-bit="iit"></span></td>
+
+                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px">
+                                <div style="box-sizing:border-box;width:30px"></div>
+                            </td>
+                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+
+                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:198.125px;vertical-align:-webkit-baseline-middle">
+
+                                    <tbody style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                                        <h2 color="#000000" style="box-sizing:border-box;font-size:18px;line-height:1.38;margin:0px;color:rgb(0,0,0);font-weight:bold;letter-spacing: 0px;font-family:arial; text-transform:capitalize;"><span style="box-sizing:border-box">${nameInput}</span></h2>
+                                        <p color="#000000" style="box-sizing:border-box;font-size:14px;line-height:22px;margin:0px;color:rgb(0,0,0)"><span style="box-sizing:border-box">${titleInput}</span></p>
+                                        <td height="10" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                                                
+                                            </td>
+                                    </tbody>
+                                    <tbody style="box-sizing:border-box">
+
+                                        <tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
+                                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
+                                                    <tbody style="box-sizing:border-box">
+                                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                                                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci6.googleusercontent.com/proxy/Xq3hntJEq2rjJzR0uWCVm3clsSla7NsI7xyRuy0B6esGxKEs0TJKSCBJd0PTJnw80_-gOm3yRwJoGtSWipm4TqjnmSCEllHm6WPq2oze68mmA8DO6Mj2dGBHroByKflVGCBL0c-wyQ3vCF92=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/phone-icon-2x.png" color="#f2547d" alt="mobilePhone" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td style="box-sizing:border-box;padding:0px;border:0px;color:rgb(0,0,0)"><a href="tel:${phoneInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank"><span style="box-sizing:border-box">${phoneInput}</span></a></td>
+                                        </tr>
+                                        <tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
+                                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
+                                                    <tbody style="box-sizing:border-box">
+                                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                                                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/u9Dqq8IRTYcA9pxGhij8X1100IBTEBNk6GfgLex2wy5mIUGt4EvtpI__1csTElV-MUMrqJCa2SjWZkRDmYNbTv260GIk6RQb8BWD6Fub4s38olgLolJ-Y0ZMzSkDaCxhCmOgByGso4GxlMz7=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/email-icon-2x.png" color="#f2547d" alt="emailAddress" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td style="box-sizing:border-box;padding:0px;border:0px"><a href="mailto:${emailInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank"><span style="box-sizing:border-box">${emailInput}</span></a></td>
+                                        </tr>
+                                        <tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
+                                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
+                                                    <tbody style="box-sizing:border-box">
+                                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                                                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/bDGbdhNSZAZaKWHjXdHMW3DL3PklwLU9F5lSquHVukVuOVNDm_0LSPw8ckOtJwduaqdVOyJnATN5reUqPaX3QjUNCZkwbG2Ac8UdOzrywgI_nREPLk66UFxOhX3uiKMJOqLfWEBJyXQ51Tk=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/link-icon-2x.png" color="#f2547d" alt="website" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td style="box-sizing:border-box;padding:0px;border:0px">
+                                                <a href="https://${websiteInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank" <span style="box-sizing:border-box">${websiteInput}</span></a>
+                                            </td>
+                                        </tr>
+                                        <tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
+                                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
+                                                    <tbody style="box-sizing:border-box">
+                                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                                                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/PMsX6QYblfid2-Aq_atF0w8D-5O2KEMGfclrImAJEOsQqE_sbKhMfAd7gH3akRnGu3ErEwVfaOuRfuDxpUBCSL-LKhPfwPnP1FnJHgaOjcrmV2CgMlczkQKYJb-bo0qnAEo7PcQNq51IElkIZFk=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/address-icon-2x.png" color="#f2547d" alt="address" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td style="box-sizing:border-box;padding:0px;border:0px"><span color="#000000" style="box-sizing:border-box;font-size:12px;color:rgb(0,0,0)"><span style="box-sizing:border-box">${locationInput}</span></span>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </td>
-                            <td style="vertical-align:top;font-family:Arial, Helvetica, sans-serif;border: 0px;padding-left:15px;padding-bottom:14px;">
-                                <table cellspacing="0" cellpadding="0" border="0" style="border-collapse: collapse;table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;direction: ltr" width="100%" emb-background-style="">
-                                    <tbody>
-                                        <tr>
-                                            <td style="color:#000;text-decoration:none;font-size:18.2px;font-family:Arial, Helvetica, sans-serif;font-weight:bold;line-height:18px;mso-line-height-rule:exactly;padding-bottom:5px;">
-                                                <span style="color:#000;text-decoration:none;font-size:18.2px;font-family:Arial, Helvetica, sans-serif;font-weight:bold;line-height:18px;mso-line-height-rule:exactly;">
-                                                    ${nameInput}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="color:#000000;text-decoration:none;font-size:14.3px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;line-height:18px;mso-line-height-rule:exactly;padding-bottom:20px;">
-                                                ${titleInput}</td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="middle" height="23" style="color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle; valign:middle;">
-                                                <img src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_Phone.png" valign="middle" height="18" width="18" alt="phone" style="display:inline;border:0px;border-radius: 0px;vertical-align:middle;" border="0" nosend="1"><span width=15px style="width:15px;">&nbsp&nbsp&nbsp</span>
-                                                <a valign="middle" height="18" href="tel:${phoneInput}" style="display:inline;color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle;">
-                                                    ${phoneInput}</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="middle" height="23" style="color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle; valign:middle;">
-                                                <img src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_Email.png" valign="middle" height="18" width="18" alt="email" style="display:inline;border:0px;border-radius: 0px;vertical-align:middle;" border="0" nosend="1"><span width=15px style="width:15px;">&nbsp&nbsp&nbsp</span>
-                                                <a valign="middle" height="18" href="mailto:${emailInput}" style="display:inline;color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle;">
-                                                    ${emailInput}</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="middle" height="23" style="color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle; valign:middle;">
-                                                <img src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_Location.png" valign="middle" height="18" width="18" alt="location" style="display:inline;border:0px;border-radius: 0px;vertical-align:middle; " border="0" nosend="1"><span width=15px style="width:15px;">&nbsp&nbsp&nbsp</span>
-                                                <span valign="middle" height="18" style="display:inline-block;color:#000000;text-decoration:none;font-size:13px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;mso-line-height-rule:exactly;vertical-align:middle; padding-top:3px;">
-                                                    <em>${locationInput}</em></span>
-                                            </td>
-                                        </tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr height='10px' style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+        <td style="box-sizing:border-box;padding:0px;border:0px">
+                <tbody style="box-sizing:border-box">
+                </tbody>
+            </table>
+        </td>
+    </tr>
+        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+            <td style="box-sizing:border-box;padding:0px;border:0px">
+                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
 
+                        <p color="#000000" style="box-sizing:border-box;font-size:12px;line-height:22px;margin:0px;color:rgb(0,0,0);font-style:italic"><span style="box-sizing:border-box">${quoteLine}</span></p>
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+            <td style="box-sizing:border-box;padding:0px;border:0px">
+                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:400px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td height="10" style="box-sizing:border-box;padding:0px;border:0px"></td>
+                        </tr>
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td color="#f2547d" width="auto" height="1" style="box-sizing:border-box;padding:0px;border-top:0px;border-right:0px;border-bottom:1px solid rgb(81 0 255 / 1);border-left:none;width:450px;display:block"></td>
+                        </tr>
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td height=20" style="box-sizing:border-box;padding:0px;border:0px"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        
+        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+            <td style="box-sizing:border-box;padding:0px;border:0px">
+                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:top"><img src="${logoInput}"
+                                    role="presentation" width="160" style="box-sizing:border-box;border-style:none;display:inline-block;max-width:230px" class="CToWUd" data-bit="iit"></td>
+                                    <td width="50" style="box-sizing:border-box;padding:0px;border:0px">
+                                    <div style="box-sizing:border-box;width:50px"></div>
+                                </td>
+                                    <td style="box-sizing:border-box;padding:0px;border:0px;text-align:right;vertical-align:top">
+                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:120px;display:inline-block;vertical-align:-webkit-baseline-middle">
+                                    <tbody style="box-sizing:border-box">
+                                    <tr height='4' style="box-sizing:border-box;margin:0px;padding:0px;border:0px"></tr>
+                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                                            <td style="box-sizing:border-box;padding:0px;border:0px">
+                                                <a href="${facebookInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci6.googleusercontent.com/proxy/CsU8Viqi3BJDAFLrGZPksmkYgWVO33uPMuUPYTdIjlZGkYPTUoI_vJDzFKjQFwApPgNeOzuP2McTvftBr9y45oU4K7hT_3YVrqR7L-3VwYbeIS13VrCdWig_8JnKG5CZ_mBs7omd-uFCFStjfCVo=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/facebook-icon-2x.png"
+                                                        alt="facebook" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
+                                            </td>
+                                            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
+                                                <div style="box-sizing:border-box"></div>
+                                            </td>
+                                            <td style="box-sizing:border-box;padding:0px;border:0px">
+                                                <a href="${twitterInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank" ><img src="https://ci5.googleusercontent.com/proxy/7hurPF5R2XfTJTr2Fqhp-g90VfcTNaZV-l9jil-wiHwtT5Ml1DQ7jOF4iK6ioEc0wAAWwT4hZgaXYPuOg4zJ5G-cClwKcyCAVyjvb3__WdNvjK_wisecltPdtxx2obIkLOEh82rck1AaTEV-FxA=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/twitter-icon-2x.png"
+                                                        alt="twitter" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
+                                            </td>
+                                            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
+                                                <div style="box-sizing:border-box"></div>
+                                            </td>
+                                            <td style="box-sizing:border-box;padding:0px;border:0px">
+                                                <a href="${linkedinInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci6.googleusercontent.com/proxy/8VnMNxHLCZ0mb5p6kFUeerh69ZxNFn796FO-bPB4zCIy6zKpR1zhFWOLua5F0V0VgIit8AVUmjEgifJrk7e9BwF3wOGdMevsrii7gV2oBOFEo5guBdtnCAwg1eRcW3MR-HHxsstpA8fhJPI5apj8=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/linkedin-icon-2x.png"
+                                                        alt="linkedin" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
+                                            </td>
+                                            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
+                                                <div style="box-sizing:border-box"></div>
+                                            </td>
+                                            <td style="box-sizing:border-box;padding:0px;border:0px">
+                                                <a href="${instagramInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci4.googleusercontent.com/proxy/N8g6tZ7eglyo7c_6d8oDw66CnB6TXXjsEzJARvc9fD3jikHSnoEtAs2zQjlpsa6zX3aAyD6apMdrUeWhCbbT_8rbyW-AqHOjfQQWIa_UrT_KpQ4kKh1zjDP5nh-osDYyAh4XeiSmeBBT1nFHzi8PtQ=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/instagram-icon-2x.png"
+                                                        alt="instagram" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
+                                            </td>
+                                            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
+                                                <div style="box-sizing:border-box"></div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <table cellspacing="0" cellpadding="0" border="0" style=" border-collapse: collapse;table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;direction: ltr" emb-background-style="">
-                    <tbody>
-                        <tr>
-                            <td style="padding-top:0x; padding-bottom:10px;">
-                                <span style="color:#000;text-decoration:none;font-size:12px;font-family:Arial, Helvetica, sans-serif;font-style:italic;font-weight:normal;line-height:9px;mso-line-height-rule:exactly;">
-                                    ${quoteLine}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table cellspacing="0" cellpadding="0" border="0" width="450" style=" border-collapse: collapse;table-layout: fixed;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;direction: ltr;vertical-align:middle; valign:middle;" emb-background-style="">
-                    <tbody>
-                        <tr>
-                            <td style="padding-top:7.5px; border-top: 1px solid #000;border-width: 1px 0px 0px;border-top-style: solid;" width="325">
-                                <img height="51" src=${logoInput} style="border-radius: 4px;display: block;border: none; height: 51px; max-height: 51px !important;vertical-align:middle; valign:middle;">
-                            </td>
-                            <td style="padding-top:7.5px; border-top: 1px solid #000;border-width: 1px 0px 0px;border-top-style: solid;">
-                                
-                                    <a href="https://www.linkedin.com/company/neural-impact/" target="_blank" style="border: 0;display: inline-block">
-                                    <img width="30" height="30" src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_LinkedIn-Icon.png" style="border-radius: 4px;display: block;border: none;width: 30px;max-width: 30px !important; height: 30px; max-height: 30px !important;vertical-align:middle; valign:middle;">
-                                    </a>
-                                    <span width=6px style="width:6px;">&nbsp</span>
-                                    <a href="https://www.youtube.com/channel/UCawa_HRn4wd3N2cVFmSQ5sQ" target="_blank" style="border: 0;display: inline-block">
-                                    <img width="30" height="30" src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_Youtube-Icon.png" style="border-radius: 4px;display: block;border: none;width: 30px;max-width: 30px !important; height: 30px; max-height: 30px !important;vertical-align:middle; valign:middle;">
-                                    </a>
-                                    <span width=6px style="width:6px;">&nbsp</span>
-                                    <a href="https://neuralimpact.ca/" target="_blank" style="border: 0;display: inline-block">
-                                    <img width="30" height="30" src="https://teamassets.neuralimpact.ca/wp-content/uploads/2022/02/Logo_Website-Icon.png" style="border-radius: 4px;display: block;border: none;width: 30px;max-width: 30px !important; height: 30px; max-height: 30px !important;vertical-align:middle; valign:middle;">
-                                    </a>
-                                
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
             </td>
         </tr>
     </tbody>
 </table>
-
 
 
       `;
