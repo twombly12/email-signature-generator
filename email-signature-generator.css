@@ -168,6 +168,10 @@ section .email-signature {
     border: 1px solid rgba(70, 90, 126, 0.4);
 }
 
+#emailInput label.filewrap {
+    width: calc(50% - 10px);
+}
+
 .filewrap {
     display: flex;
     align-items: center;

@@ -56,7 +56,16 @@ function websitePrefix(website) {
 
 
 function submitInfo() {
-    imageInput = portraitUrl.src;
+    console.log(portraitUrl.src)
+
+    if (portraitUrl.src == '') {
+        imageInput = logoUrl.src;
+        logoInput = '';
+    } else {
+        imageInput = portraitUrl.src;
+        logoInput = logoUrl.src;
+    }
+
     signOffInput = document.getElementById('signOff').value;
     nameInput = document.getElementById('name').value;
     titleInput = document.getElementById('title').value;
@@ -77,7 +86,8 @@ function submitInfo() {
     twitterInput = document.querySelector('#twitter');
     linkedinInput = document.querySelector('#linkedIn');
     instagramInput = document.querySelector('#instagram');
-    logoInput = logoUrl.src;
+
+
 
     previewSignature();
 }
@@ -374,10 +384,8 @@ function getImageURL() {
         const uploaded_image = reader.result;
         if (element == 'portrait') {
             portraitUrl.src = uploaded_image
-            console.log(portraitUrl)
         } else if (element == 'logo') {
             logoUrl.src = uploaded_image
-            console.log(logoUrl)
         }
 
     });

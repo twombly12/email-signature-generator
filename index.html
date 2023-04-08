@@ -50,8 +50,10 @@
                 <div id="signature-container"></div>
                 <div id="email-container" class="">
                     <form id="emailInput" class="">
-                        <label id="portrait-name" class="filewrap" for="portrait-input">Upload Your Portrait</label>
+                        <label id="portrait-name" class="filewrap" for="portrait-input">Upload Your Portrait (Optional)</label>
                         <input id="portrait-input" data-attribute="portrait" type="file" accept="image/*" placeholder="Upload your Logo" onchange='uploadFile(this)'>
+                        <label id="logo-name" class="filewrap" for="logo-input">Upload Your Company Logo</label>
+                        <input id="logo-input" data-attribute="logo" type="file" accept="image/*" placeholder="Upload your Logo" onchange='uploadFile(this)'>
                         <input class="third-field" type="text" id="signOff" placeholder="Sign Off" name="signOff" required="">
                         <input class="third-field" type="text" id="name" placeholder="Full Name" name="name" required="">
                         <input class="third-field" type="text" id="title" placeholder="Job Title" name="job-title" required="">
@@ -61,12 +63,11 @@
                         <input class="half-field" type="text" id="location" placeholder="Location" name="location" required="">
                         <input type="text" id="quote" placeholder="Quote (Optional)" name="quote" required="">
                         <input type="text" id="author" placeholder="Author (Optional)" name="author" required="">
-                        <input class="half-field" type="text" id="facebook" placeholder="Facebook" name="facebook" required="">
-                        <input class="half-field" type="text" id="twitter" placeholder="Twitter" name="twitter" required="">
-                        <input class="half-field" type="text" id="linkedIn" placeholder="LinkedIn" name="linkedIn" required="">
-                        <input class="half-field" type="text" id="instagram" placeholder="Instagram" name="instagram" required="">
-                        <label id="logo-name" class="filewrap" for="logo-input">Upload Your Company Logo</label>
-                        <input id="logo-input" data-attribute="logo" type="file" accept="image/*" placeholder="Upload your Logo" onchange='uploadFile(this)'>
+                        <input class="half-field" type="text" id="facebook" placeholder="Facebook (Optional)" name="facebook" required="">
+                        <input class="half-field" type="text" id="twitter" placeholder="Twitter (Optional)" name="twitter" required="">
+                        <input class="half-field" type="text" id="linkedIn" placeholder="LinkedIn (Optional)" name="linkedIn" required="">
+                        <input class="half-field" type="text" id="instagram" placeholder="Instagram (Optional)" name="instagram" required="">
+
                     </form>
                     <div class="form-buttons">
                         <!-- <button id="submitInfo" class="btn neumorphic neumorphic-disabled" onclick="submitInfo()"> <span> Preview </span> </button> -->
