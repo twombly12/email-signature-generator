@@ -8,6 +8,9 @@ section .email-signature {
     display: none;
 }
 
+
+/* ------------------------------ Pop Up for Publish ------------------------------ */
+
 #popup-display {
     position: fixed;
     displaY: none;
@@ -27,13 +30,15 @@ section .email-signature {
     align-items: center;
     justify-content: center;
     width: 800px;
-    background: white;
     position: absolute;
-    top: 50%;
+    top: calc(50% + 30px);
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 10px rgb(0 0 0 / 0.4);
-    padding-bottom: 4%;
+    border: 2px solid rgb(230 230 230 / 1.0);
+    background: #FFF;
+    padding: 40px 30px;
+    border-radius: 8px;
 }
 
 #popup-alignment {
@@ -46,38 +51,32 @@ section .email-signature {
     position: relative;
 }
 
+#popup-container i {
+    width: 100%;
+    cursor: pointer;
+}
+
 .fa-times-circle {
     position: absolute;
     top: -1.5%;
-    right: -1.5%;
+    right: 1%;
     background: rgb(255 255 255 / 1);
     border-radius: 100px;
     font-size: 34px;
     padding: 1px;
     width: 30px !important;
     height: 30px !important;
-    color: #036CAA;
+    color: rgb(81 0 255 / 1);
     z-index: 11;
+    transition: 0.3s ease all;
 }
 
 .fa-times-circle:hover {
-    color: steelblue;
+    color: rgb(168 128 255 / 1)
 }
 
 #copyCode {
-    border: 2px solid #036CAA;
-    padding: 10px 20px;
-    margin-top: 40px;
-    color: #036CAA;
-    transition: 0.3s ease all;
-    font-weight: 700;
-    font-family: Montserrat;
-}
-
-#copyCode:hover {
-    border-color: #00273C;
-    background: #00273C;
-    color: #93C83E;
+    margin-top: 20px;
 }
 
 #email-container {
@@ -88,7 +87,7 @@ section .email-signature {
 }
 
 #signature-container {
-    margin: 40px auto 0;
+    margin: 40px auto 50px;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -142,7 +141,7 @@ section .email-signature {
 }
 
 
-/* ------------------------------ Image & Form Input ------------------------------ */
+/* ------------------------------ Form Input Styling ------------------------------ */
 
 #emailInput {
     position: relative;
@@ -168,16 +167,17 @@ section .email-signature {
     border: 1px solid rgba(70, 90, 126, 0.4);
 }
 
-#emailInput label.filewrap {
-    width: calc(50% - 10px);
-}
 
-.filewrap {
+/* ------------------------------ File upload Styling ------------------------------ */
+
+#emailInput label.filewrap {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: calc(50% - 10px);
     background-color: rgb(232, 240, 254);
     color: #000;
+    font-weight: 600;
 }
 
 .filewrap:hover {
@@ -195,6 +195,30 @@ input[type="file"] {
     display: none;
 }
 
+
+/* ------------------------------ Checkbox Styling ------------------------------ */
+
+
+/* .portrait-radius {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.portrait-radius label,
+.portrait-radius input {
+    cursor: pointer;
+}
+
+#emailInput input[type="checkbox"] {
+    width: 30%;
+    height: 100%;
+} */
+
+
+/* ------------------------------ Phone Input ------------------------------ */
+
 .iti {
     width: calc(50% - 10px);
 }
@@ -202,6 +226,20 @@ input[type="file"] {
 #emailInput .iti input {
     padding-left: 52px;
 }
+
+
+/* ------------------------------ Form Field Sizing ------------------------------ */
+
+#emailInput .half-field {
+    width: calc(50% - 10px);
+}
+
+#emailInput .third-field {
+    width: calc(33% - 12px);
+}
+
+
+/* ------------------------------ Form Buttons ------------------------------ */
 
 .form-buttons {
     display: grid;
@@ -212,12 +250,4 @@ input[type="file"] {
 
 .form-buttons button {
     justify-self: center;
-}
-
-#emailInput .half-field {
-    width: calc(50% - 10px);
-}
-
-#emailInput .third-field {
-    width: calc(33% - 12px);
 }

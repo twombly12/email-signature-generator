@@ -1,3 +1,5 @@
-Better HTML Signature builds
-SVGs for social
+
+Add Social images as custom images
+New Website Icon
+~~ add option to circle or square portrait - (Already added inputs and values)
 Style publish popup

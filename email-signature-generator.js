@@ -1,4 +1,6 @@
-let imageInput = "https://neuralimpact.ca/wp-content/uploads/2012/07/sharka.png";
+let imageInput = "/portrait.jpg";
+// let squarePortrait = 'false';
+// let circlePortrait = 'true';
 let signOffInput = "Regards, John";
 let nameInput = "John Smith";
 let titleInput = "Chief Executive Officer";
@@ -18,7 +20,7 @@ let twitterInput = 'https://www.twitter.com';
 let linkedinInput = 'https://www.linkedin.com';
 let instagramInput = 'https://www.instagram.com';
 
-let logoInput = "/Dash Logo Colours-purple.svg"
+let logoInput = "/Dash Logo Colours-purple.png"
 
 
 function phoneFormat(phone) {
@@ -28,6 +30,7 @@ function phoneFormat(phone) {
     let firstThree = phone.splice(-3).join('');
     return `${phone.join('')} ${firstThree}-${secondThree}-${lastFour}`
 }
+
 let phoneEntered = '';
 
 function internationalPhone() {
@@ -36,6 +39,7 @@ function internationalPhone() {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
 }
+
 internationalPhone()
 
 function websitePrefix(website) {
@@ -49,22 +53,33 @@ function websitePrefix(website) {
     return website
 }
 
-
-
-
-/* Team Images */
-
+/-------------------------- Submit info from form --------------------------/
 
 function submitInfo() {
-    console.log(portraitUrl.src)
+
+    if (logoUrl.src == '') {
+        alert('Please add a Logo');
+        return
+    }
+
+    let portraitSlot = 'portraitSlot';
+    let logoSlot = 'logoSlot';
 
     if (portraitUrl.src == '') {
+        logoUrl.src = resizeImage(logoUrl, portraitSlot)
         imageInput = logoUrl.src;
         logoInput = '';
     } else {
+        portraitUrl.src = resizeImage(portraitUrl, portraitSlot)
         imageInput = portraitUrl.src;
+        logoUrl.src = resizeImage(logoUrl, logoSlot)
         logoInput = logoUrl.src;
     }
+
+    // squarePortrait = document.querySelector('#square-portrait').checked;
+    // circlePortrait = document.querySelector('#circle-portrait').checked;
+
+    // console.log(squarePortrait, circlePortrait)
 
     signOffInput = document.getElementById('signOff').value;
     nameInput = document.getElementById('name').value;
@@ -82,12 +97,10 @@ function submitInfo() {
         // quotePadding = 10;
         quoteLine = quoteInput + " - " + authorInput;
     }
-    facebookInput = document.querySelector('#facebook');
-    twitterInput = document.querySelector('#twitter');
-    linkedinInput = document.querySelector('#linkedIn');
-    instagramInput = document.querySelector('#instagram');
-
-
+    facebookInput = websitePrefix(document.querySelector('#facebook').value);
+    twitterInput = websitePrefix(document.querySelector('#twitter').value);
+    linkedinInput = websitePrefix(document.querySelector('#linkedIn').value);
+    instagramInput = websitePrefix(document.querySelector('#instagram').value);
 
     previewSignature();
 }
@@ -127,22 +140,148 @@ function submitInfo() {
 //     }
 // }
 
+function generateLogo() {
+    let logo = '';
+
+    if (logoInput != '') {
+        logo = `<td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:top"><img src="${logoInput}"
+        role="presentation" style="box-sizing:border-box;border-style:none;display:inline-block;" class="CToWUd" data-bit="iit"></td>`
+    }
+
+    return logo
+}
+
+function generateContactInfo() {
+    let phone = '';
+    let email = '';
+    let website = '';
+    let location = '';
+
+    if (phoneEntered.getNumber() != '' || phoneInput != ' --') {
+        phone = `<tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
+            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci6.googleusercontent.com/proxy/Xq3hntJEq2rjJzR0uWCVm3clsSla7NsI7xyRuy0B6esGxKEs0TJKSCBJd0PTJnw80_-gOm3yRwJoGtSWipm4TqjnmSCEllHm6WPq2oze68mmA8DO6Mj2dGBHroByKflVGCBL0c-wyQ3vCF92=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/phone-icon-2x.png" color="#f2547d" alt="mobilePhone" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td style="box-sizing:border-box;padding:0px;border:0px;color:rgb(0,0,0)"><a href="tel:${phoneInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank"><span style="box-sizing:border-box">${phoneInput}</span></a></td>
+        </tr>`
+    }
+
+    if (emailInput != '') {
+        email = `<tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
+            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/u9Dqq8IRTYcA9pxGhij8X1100IBTEBNk6GfgLex2wy5mIUGt4EvtpI__1csTElV-MUMrqJCa2SjWZkRDmYNbTv260GIk6RQb8BWD6Fub4s38olgLolJ-Y0ZMzSkDaCxhCmOgByGso4GxlMz7=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/email-icon-2x.png" color="#f2547d" alt="emailAddress" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td style="box-sizing:border-box;padding:0px;border:0px"><a href="mailto:${emailInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank"><span style="box-sizing:border-box">${emailInput}</span></a></td>
+        </tr>`
+    }
+
+    if (websiteInput != '') {
+        website = `<tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
+            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/bDGbdhNSZAZaKWHjXdHMW3DL3PklwLU9F5lSquHVukVuOVNDm_0LSPw8ckOtJwduaqdVOyJnATN5reUqPaX3QjUNCZkwbG2Ac8UdOzrywgI_nREPLk66UFxOhX3uiKMJOqLfWEBJyXQ51Tk=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/link-icon-2x.png" color="#f2547d" alt="website" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td style="box-sizing:border-box;padding:0px;border:0px">
+                <a href="https://${websiteInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank" <span style="box-sizing:border-box">${websiteInput}</span></a>
+            </td>
+        </tr>`
+    }
+
+    if (locationInput != '') {
+        location = `<tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
+            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
+                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
+                    <tbody style="box-sizing:border-box">
+                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
+                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/PMsX6QYblfid2-Aq_atF0w8D-5O2KEMGfclrImAJEOsQqE_sbKhMfAd7gH3akRnGu3ErEwVfaOuRfuDxpUBCSL-LKhPfwPnP1FnJHgaOjcrmV2CgMlczkQKYJb-bo0qnAEo7PcQNq51IElkIZFk=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/address-icon-2x.png" color="#f2547d" alt="address" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td style="box-sizing:border-box;padding:0px;border:0px"><span color="#000000" style="box-sizing:border-box;font-size:12px;color:rgb(0,0,0)"><span style="box-sizing:border-box">${locationInput}</span></span>
+            </td>
+        </tr>`
+    }
+
+    return phone + email + website + location;
+}
 
 
+function generateSocial() {
+    let facebook = '';
+    let twitter = '';
+    let instagram = '';
+    let linkedIn = '';
 
+    if (facebookInput != '') {
+        facebook = `<td style="box-sizing:border-box;padding:0px;border:0px">
+                <a href="https://${facebookInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci6.googleusercontent.com/proxy/CsU8Viqi3BJDAFLrGZPksmkYgWVO33uPMuUPYTdIjlZGkYPTUoI_vJDzFKjQFwApPgNeOzuP2McTvftBr9y45oU4K7hT_3YVrqR7L-3VwYbeIS13VrCdWig_8JnKG5CZ_mBs7omd-uFCFStjfCVo=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/facebook-icon-2x.png"
+                        alt="facebook" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
+            </td>
+            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
+                <div style="box-sizing:border-box"></div>
+            </td>`
+    }
+
+    if (twitterInput != '') {
+        twitter = `<td style="box-sizing:border-box;padding:0px;border:0px">
+                <a href="https://${twitterInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank" ><img src="https://ci5.googleusercontent.com/proxy/7hurPF5R2XfTJTr2Fqhp-g90VfcTNaZV-l9jil-wiHwtT5Ml1DQ7jOF4iK6ioEc0wAAWwT4hZgaXYPuOg4zJ5G-cClwKcyCAVyjvb3__WdNvjK_wisecltPdtxx2obIkLOEh82rck1AaTEV-FxA=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/twitter-icon-2x.png"
+                        alt="twitter" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
+            </td>
+            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
+                <div style="box-sizing:border-box"></div>
+            </td>`
+    }
+
+    if (linkedinInput != '') {
+        linkedIn = `
+                    <td style="box-sizing:border-box;padding:0px;border:0px">
+                <a href="https://${linkedinInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci6.googleusercontent.com/proxy/8VnMNxHLCZ0mb5p6kFUeerh69ZxNFn796FO-bPB4zCIy6zKpR1zhFWOLua5F0V0VgIit8AVUmjEgifJrk7e9BwF3wOGdMevsrii7gV2oBOFEo5guBdtnCAwg1eRcW3MR-HHxsstpA8fhJPI5apj8=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/linkedin-icon-2x.png"
+                        alt="linkedin" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
+            </td>
+            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
+                <div style="box-sizing:border-box"></div>
+            </td>`
+    }
+
+    if (instagramInput != '') {
+        instagram = `<td style="box-sizing:border-box;padding:0px;border:0px">
+                <a href="https://${instagramInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci4.googleusercontent.com/proxy/N8g6tZ7eglyo7c_6d8oDw66CnB6TXXjsEzJARvc9fD3jikHSnoEtAs2zQjlpsa6zX3aAyD6apMdrUeWhCbbT_8rbyW-AqHOjfQQWIa_UrT_KpQ4kKh1zjDP5nh-osDYyAh4XeiSmeBBT1nFHzi8PtQ=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/instagram-icon-2x.png"
+                        alt="instagram" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
+            </td>
+            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
+                <div style="box-sizing:border-box"></div>
+            </td>`
+    }
+    return facebook + twitter + instagram + linkedIn
+}
 
 
 function generateSignature() {
-    const signatureOutput = `
 
+    const signatureOutput = `
     <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;color:rgb(255,255,255);font-size:medium;vertical-align:-webkit-baseline-middle;font-family:Arial">
     <tr height="50" style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
             <td style="box-sizing:border-box;padding:0px;border:0px">
                 <p color="#000000" style="box-sizing:border-box;font-size:18px; font-weight: bold;line-height:22px;margin:0px;color:rgb(0,0,0)"><span style="box-sizing:border-box">${signOffInput}</span></p><table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;vertical-align:-webkit-baseline-middle">
                     <tbody style="box-sizing:border-box">
-
-                        
-
                     </tbody>
                 </table>
             </td>
@@ -153,75 +292,21 @@ function generateSignature() {
                 <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;vertical-align:-webkit-baseline-middle">
                     <tbody style="box-sizing:border-box">
                         <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
-                            <td width="150" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle"><span style="box-sizing:border-box;margin-right:20px;display:block"><img src="${imageInput}" role="presentation" width="130" style="box-sizing:border-box;border-style:none;max-width:130px" class="CToWUd" data-bit="iit"></span></td>
+                            <td width="150" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle"><span style="box-sizing:border-box;margin-right:20px;display:block"><img src="${imageInput}" role="presentation"  style="box-sizing:border-box;border-style:none;" class="CToWUd" data-bit="iit"></span></td>
 
                             <td width="30" style="box-sizing:border-box;padding:0px;border:0px">
                                 <div style="box-sizing:border-box;width:30px"></div>
                             </td>
                             <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
-
                                 <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:198.125px;vertical-align:-webkit-baseline-middle">
-
                                     <tbody style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
                                         <h2 color="#000000" style="box-sizing:border-box;font-size:18px;line-height:1.38;margin:0px;color:rgb(0,0,0);font-weight:bold;letter-spacing: 0px;font-family:arial; text-transform:capitalize;"><span style="box-sizing:border-box">${nameInput}</span></h2>
                                         <p color="#000000" style="box-sizing:border-box;font-size:14px;line-height:22px;margin:0px;color:rgb(0,0,0)"><span style="box-sizing:border-box">${titleInput}</span></p>
                                         <td height="10" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
-                                                
                                             </td>
                                     </tbody>
                                     <tbody style="box-sizing:border-box">
-
-                                        <tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
-                                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
-                                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
-                                                    <tbody style="box-sizing:border-box">
-                                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
-                                                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci6.googleusercontent.com/proxy/Xq3hntJEq2rjJzR0uWCVm3clsSla7NsI7xyRuy0B6esGxKEs0TJKSCBJd0PTJnw80_-gOm3yRwJoGtSWipm4TqjnmSCEllHm6WPq2oze68mmA8DO6Mj2dGBHroByKflVGCBL0c-wyQ3vCF92=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/phone-icon-2x.png" color="#f2547d" alt="mobilePhone" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                            <td style="box-sizing:border-box;padding:0px;border:0px;color:rgb(0,0,0)"><a href="tel:${phoneInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank"><span style="box-sizing:border-box">${phoneInput}</span></a></td>
-                                        </tr>
-                                        <tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
-                                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
-                                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
-                                                    <tbody style="box-sizing:border-box">
-                                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
-                                                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/u9Dqq8IRTYcA9pxGhij8X1100IBTEBNk6GfgLex2wy5mIUGt4EvtpI__1csTElV-MUMrqJCa2SjWZkRDmYNbTv260GIk6RQb8BWD6Fub4s38olgLolJ-Y0ZMzSkDaCxhCmOgByGso4GxlMz7=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/email-icon-2x.png" color="#f2547d" alt="emailAddress" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                            <td style="box-sizing:border-box;padding:0px;border:0px"><a href="mailto:${emailInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank"><span style="box-sizing:border-box">${emailInput}</span></a></td>
-                                        </tr>
-                                        <tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
-                                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
-                                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
-                                                    <tbody style="box-sizing:border-box">
-                                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
-                                                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/bDGbdhNSZAZaKWHjXdHMW3DL3PklwLU9F5lSquHVukVuOVNDm_0LSPw8ckOtJwduaqdVOyJnATN5reUqPaX3QjUNCZkwbG2Ac8UdOzrywgI_nREPLk66UFxOhX3uiKMJOqLfWEBJyXQ51Tk=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/link-icon-2x.png" color="#f2547d" alt="website" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                            <td style="box-sizing:border-box;padding:0px;border:0px">
-                                                <a href="https://${websiteInput}" color="#000000" style="box-sizing:border-box;background-color:rgba(0,0,0,0);text-decoration-line:none;color:rgb(0,0,0);font-size:12px" target="__blank" <span style="box-sizing:border-box">${websiteInput}</span></a>
-                                            </td>
-                                        </tr>
-                                        <tr height="20" style="box-sizing:border-box;margin:0px;padding:0px;border:0px;vertical-align:middle">
-                                            <td width="30" style="box-sizing:border-box;padding:0px;border:0px;vertical-align:middle">
-                                                <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:30px;vertical-align:-webkit-baseline-middle">
-                                                    <tbody style="box-sizing:border-box">
-                                                        <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
-                                                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:bottom"><span color="#f2547d" width="11" style="box-sizing:border-box;display:inline-block;background-color:rgb(81 0 255 / 1)"><img src="https://ci5.googleusercontent.com/proxy/PMsX6QYblfid2-Aq_atF0w8D-5O2KEMGfclrImAJEOsQqE_sbKhMfAd7gH3akRnGu3ErEwVfaOuRfuDxpUBCSL-LKhPfwPnP1FnJHgaOjcrmV2CgMlczkQKYJb-bo0qnAEo7PcQNq51IElkIZFk=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/address-icon-2x.png" color="#f2547d" alt="address" width="13" style="box-sizing:border-box;border-style:none;display:block" class="CToWUd" data-bit="iit"></span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                            <td style="box-sizing:border-box;padding:0px;border:0px"><span color="#000000" style="box-sizing:border-box;font-size:12px;color:rgb(0,0,0)"><span style="box-sizing:border-box">${locationInput}</span></span>
-                                            </td>
-                                        </tr>
+                                       ${generateContactInfo()}
                                     </tbody>
                                 </table>
                             </td>
@@ -271,44 +356,14 @@ function generateSignature() {
                 <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:450px;vertical-align:-webkit-baseline-middle">
                     <tbody style="box-sizing:border-box">
                         <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
-                            <td style="box-sizing:border-box;padding:0px;border:0px;vertical-align:top"><img src="${logoInput}"
-                                    role="presentation" width="160" style="box-sizing:border-box;border-style:none;display:inline-block;max-width:230px" class="CToWUd" data-bit="iit"></td>
-                                    <td width="50" style="box-sizing:border-box;padding:0px;border:0px">
-                                    <div style="box-sizing:border-box;width:50px"></div>
-                                </td>
-                                    <td style="box-sizing:border-box;padding:0px;border:0px;text-align:right;vertical-align:top">
+                            ${generateLogo()}
+                                    
+                            <td class="social-align" style="box-sizing:border-box;padding:0px;border:0px;text-align:right;vertical-align:top">
                                 <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;width:120px;display:inline-block;vertical-align:-webkit-baseline-middle">
                                     <tbody style="box-sizing:border-box">
-                                    <tr height='4' style="box-sizing:border-box;margin:0px;padding:0px;border:0px"></tr>
+                                        <tr height='4' style="box-sizing:border-box;margin:0px;padding:0px;border:0px"></tr>
                                         <tr style="box-sizing:border-box;margin:0px;padding:0px;border:0px">
-                                            <td style="box-sizing:border-box;padding:0px;border:0px">
-                                                <a href="${facebookInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci6.googleusercontent.com/proxy/CsU8Viqi3BJDAFLrGZPksmkYgWVO33uPMuUPYTdIjlZGkYPTUoI_vJDzFKjQFwApPgNeOzuP2McTvftBr9y45oU4K7hT_3YVrqR7L-3VwYbeIS13VrCdWig_8JnKG5CZ_mBs7omd-uFCFStjfCVo=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/facebook-icon-2x.png"
-                                                        alt="facebook" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
-                                            </td>
-                                            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
-                                                <div style="box-sizing:border-box"></div>
-                                            </td>
-                                            <td style="box-sizing:border-box;padding:0px;border:0px">
-                                                <a href="${twitterInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank" ><img src="https://ci5.googleusercontent.com/proxy/7hurPF5R2XfTJTr2Fqhp-g90VfcTNaZV-l9jil-wiHwtT5Ml1DQ7jOF4iK6ioEc0wAAWwT4hZgaXYPuOg4zJ5G-cClwKcyCAVyjvb3__WdNvjK_wisecltPdtxx2obIkLOEh82rck1AaTEV-FxA=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/twitter-icon-2x.png"
-                                                        alt="twitter" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
-                                            </td>
-                                            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
-                                                <div style="box-sizing:border-box"></div>
-                                            </td>
-                                            <td style="box-sizing:border-box;padding:0px;border:0px">
-                                                <a href="${linkedinInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci6.googleusercontent.com/proxy/8VnMNxHLCZ0mb5p6kFUeerh69ZxNFn796FO-bPB4zCIy6zKpR1zhFWOLua5F0V0VgIit8AVUmjEgifJrk7e9BwF3wOGdMevsrii7gV2oBOFEo5guBdtnCAwg1eRcW3MR-HHxsstpA8fhJPI5apj8=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/linkedin-icon-2x.png"
-                                                        alt="linkedin" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
-                                            </td>
-                                            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
-                                                <div style="box-sizing:border-box"></div>
-                                            </td>
-                                            <td style="box-sizing:border-box;padding:0px;border:0px">
-                                                <a href="${instagramInput}" color="#6a78d1" style="box-sizing:border-box;background-color:rgb(81 0 255 / 1);display:inline-block;padding:0px" target="__blank"><img src="https://ci4.googleusercontent.com/proxy/N8g6tZ7eglyo7c_6d8oDw66CnB6TXXjsEzJARvc9fD3jikHSnoEtAs2zQjlpsa6zX3aAyD6apMdrUeWhCbbT_8rbyW-AqHOjfQQWIa_UrT_KpQ4kKh1zjDP5nh-osDYyAh4XeiSmeBBT1nFHzi8PtQ=s0-d-e1-ft#https://cdn2.hubspot.net/hubfs/53/tools/email-signature-generator/icons/instagram-icon-2x.png"
-                                                        alt="instagram" color="#6a78d1" height="24" style="box-sizing:border-box;border-style:none;max-width:135px;display:block" class="CToWUd" data-bit="iit"></a>
-                                            </td>
-                                            <td width="5" style="box-sizing:border-box;padding:0px;border:0px">
-                                                <div style="box-sizing:border-box"></div>
-                                            </td>
+                                           ${generateSocial()}
                                         </tr>
                                     </tbody>
                                 </table>
@@ -324,30 +379,45 @@ function generateSignature() {
 
       `;
     return signatureOutput;
-}
+};
 
-
-
-
+/-------------------------- Preview & Publish Signature --------------------------/
 
 function previewSignature() {
     document.getElementById("signature-container").innerHTML = generateSignature();
+    if (logoInput == '') {
+        let socialAlign = document.querySelectorAll('.social-align')
+        socialAlign.forEach(element => {
+            element.style.textAlign = 'left'
+        })
+    }
     document.querySelector('#signature-preview').scrollIntoView()
 }
 
 function publishSignature() {
+    if (logoUrl.src == '') {
+        alert('Please add a Logo');
+        return
+    }
     submitInfo();
     document.getElementById('popup-display').style.display = "block";
     document.getElementById("popup-code").innerHTML = generateSignature();
+    if (logoInput == '') {
+        let socialAlign = document.querySelectorAll('.social-align')
+        socialAlign.forEach(element => {
+            element.style.textAlign = 'left';
+        })
+    }
 }
-document.querySelector('#previewSignature').addEventListener('click', submitInfo)
-document.querySelector('#publishSignature').addEventListener('click', publishSignature)
+document.querySelector('#previewSignature').addEventListener('click', submitInfo);
+document.querySelector('#publishSignature').addEventListener('click', publishSignature);
 
+
+/-------------------------- Popup for Publish Signature --------------------------/
 
 function closePopup() {
     document.getElementById('popup-display').style.display = "none";
 }
-
 
 function copyCode() {
     let range = document.createRange();
@@ -368,36 +438,105 @@ function outFunc() {
 }
 
 /-------------------------- Image Input --------------------------/
+
 const portraitField = document.querySelector("#portrait-input");
 const logoField = document.querySelector("#logo-input");
-
-let portraitUrl = new Image();
-let logoUrl = new Image();
 
 portraitField.addEventListener("change", getImageURL);
 logoField.addEventListener("change", getImageURL);
 
+let portraitUrl = new Image();
+let logoUrl = new Image();
+
 function getImageURL() {
-    let element = this.getAttribute('data-attribute');
+    let elementLabel = this.getAttribute('data-attribute');
     const reader = new FileReader();
     reader.addEventListener("load", () => {
         const uploaded_image = reader.result;
-        if (element == 'portrait') {
+        if (elementLabel == 'portrait') {
             portraitUrl.src = uploaded_image
-        } else if (element == 'logo') {
+        } else if (elementLabel == 'logo') {
             logoUrl.src = uploaded_image
         }
-
     });
     reader.readAsDataURL(this.files[0]);
 }
 
-function uploadFile(target) {
-    let element = target.getAttribute('data-attribute');
-    document.getElementById(`${element}-name`).innerHTML = target.files[0].name;
+// Change image Input Label file name on file upload
+
+function uploadFile() {
+    let element = this.getAttribute('data-attribute');
+    document.getElementById(`${element}-name`).innerHTML = this.files[0].name;
 }
 
+let imageSubmits = document.querySelectorAll('.img-submit');
+imageSubmits.forEach(element => {
+    element.addEventListener('change', uploadFile)
+
+});
+
 /-------------------------- Draw Image to Canvas --------------------------/
+
+function resizeImage(uploadedImage, position) {
+    let canvas = document.createElement("canvas");
+    let ctx = canvas.getContext('2d');
+
+    let imageWidth = uploadedImage.width;
+    let imageHeight = uploadedImage.height;
+    let multiplier = 0;
+    let maxSize = 0;
+
+    // Find largest dimension and resize image
+    if (position == "portraitSlot") {
+        maxSize = 130;
+        if (imageHeight >= imageWidth) {
+            multiplier = imageHeight / maxSize;
+        } else {
+            multiplier = imageWidth / maxSize;
+        }
+    } else if (position == "logoSlot") {
+        maxSize = 75;
+        multiplier = imageHeight / maxSize;
+    }
+
+    // Set image and canvas size, maintain ratio, max dimension 130px
+    imageWidth = imageWidth / multiplier;
+    imageHeight = imageHeight / multiplier;
+
+    canvas.width = imageWidth + 2;
+    canvas.height = imageHeight + 2;
+
+    // create child canvas for first render
+    const oc = document.createElement('canvas');
+    const octx = oc.getContext('2d');
+    oc.width = canvas.width;
+    oc.height = canvas.height;
+
+    // pre filter blur and draw image on child canvas
+    const steps = (oc.width / canvas.width) >> 1;
+    octx.filter = `blur(${steps}px)`;
+    octx.drawImage(uploadedImage, 0, 0, imageWidth, imageHeight);
+
+    // draw child canvas on parent canvas
+    ctx.drawImage(oc, 0, 0);
+
+    const dataURI = canvas.toDataURL();
+
+    return dataURI;
+}
+
+/-------------------------- Checkboxes --------------------------/
+let checkboxes = document.querySelectorAll('.portrait-radius input')
+checkboxes.forEach(element => {
+    element.addEventListener('click', onlyOneCheckedBox)
+})
+
+function onlyOneCheckedBox() {
+    checkboxes.forEach(element => {
+        element.checked = false
+    })
+    this.checked = true;
+}
 
 
 

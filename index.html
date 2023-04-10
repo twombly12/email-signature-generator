@@ -50,10 +50,24 @@
                 <div id="signature-container"></div>
                 <div id="email-container" class="">
                     <form id="emailInput" class="">
+
                         <label id="portrait-name" class="filewrap" for="portrait-input">Upload Your Portrait (Optional)</label>
-                        <input id="portrait-input" data-attribute="portrait" type="file" accept="image/*" placeholder="Upload your Logo" onchange='uploadFile(this)'>
+                        <input id="portrait-input" class="img-submit" data-attribute="portrait" type="file" accept="image/*" placeholder="Upload your Logo">
+
+                        <!-- <div class="half-field portrait-radius">
+                            <label for="square-portrait">Square Portrait</label>
+                            <input type="checkbox" id="square-portrait" name="square-portrait" value="square-portrait" checked>
+                        </div>
+
+                        <div class="half-field portrait-radius">
+                            <label for="circle-portrait">Circle Portrait</label>
+                            <input type="checkbox" id="circle-portrait" name="circle-portrait" value="circle-portrait">
+                        </div> -->
+
+
+
                         <label id="logo-name" class="filewrap" for="logo-input">Upload Your Company Logo</label>
-                        <input id="logo-input" data-attribute="logo" type="file" accept="image/*" placeholder="Upload your Logo" onchange='uploadFile(this)'>
+                        <input id="logo-input" class="img-submit" data-attribute="logo" type="file" accept="image/*" placeholder="Upload your Logo">
                         <input class="third-field" type="text" id="signOff" placeholder="Sign Off" name="signOff" required="">
                         <input class="third-field" type="text" id="name" placeholder="Full Name" name="name" required="">
                         <input class="third-field" type="text" id="title" placeholder="Job Title" name="job-title" required="">
@@ -79,11 +93,15 @@
                 <div id="popup-display" class="">
                     <div id="popup-container" class="">
                         <i class="far fa-times-circle" onclick="closePopup()"></i>
-                        <h2>Copy &amp; Paste into your Email Signature</h2>
+                        <h2>Copy &amp; Paste</h2>
+                        <br>
+                        <p>Click the button below to copy the email signature</p>
+                        <p>Then paste it into the settings of your email</p>
+                        <br>
                         <div id="popup-alignment">
                             <div id="popup-code" class=""></div>
                         </div>
-                        <button id="copyCode" class="tooltip" onclick="copyCode()" onmouseout="outFunc()">
+                        <button id="copyCode" class="tooltip button" onclick="copyCode()" onmouseout="outFunc()">
                         <span class="tooltiptext" id="myTooltip">Copied to Clipboard</span>
                         Click to copy
                     </button>
